@@ -19,9 +19,9 @@ sleep <- read.csv("~/UNI/STAT2170/Assignment/sleep.csv")
 
 ------------------------------------------------------------------------
 
-## **Question 1: Study based on risk factors for obstructive sleep apnoea (OSA)**
+## **Study based on risk factors for obstructive sleep apnoea (OSA)**
 
-### **1.a) Scatter-plot Matrix**
+### **1.1) Scatter-plot Matrix**
 
 ```{r}
 pairs(sleep)
@@ -37,7 +37,7 @@ Among the predictors, **bmi and neck size are highly correlated**, which suggest
 
 ------------------------------------------------------------------------
 
-### **1.b Fitting The Regression Model**
+### **1.2) Fitting The Regression Model**
 
 ***Fitting the linear regression model using `ai` as the response variable and the other variables as the predictor.***
 
@@ -62,7 +62,7 @@ This provides **strong evidence** that neck size is an important risk factor for
 
 ------------------------------------------------------------------------
 
-### **1.c) F-test For The Overall Regression**
+### **1.3) F-test For The Overall Regression**
 
 ```{r}
 summary(sleep.lm)
@@ -156,7 +156,7 @@ There is strong evidence that at least one of the predictors is significantly as
 
 ------------------------------------------------------------------------
 
-### **1.d) Model Validation & Appropriation**
+### **1.4) Model Validation & Appropriation**
 
 *Checking residual vs fitted plots for linearity and constant variance*
 
@@ -184,7 +184,7 @@ The standardized qqplot shows that the residuals mostly follow the normal line, 
 
 ------------------------------------------------------------------------
 
-### **1.e)** $R^2$ **and It's Significance**
+### **1.5)** $R^2$ **and It's Significance**
 
 ```{r}
 summary(sleep.lm)$adj.r.squared
@@ -193,7 +193,7 @@ summary(sleep.lm)$adj.r.squared
 Adjusted $R^2$ = `0.2213`. This is quite a low value, it means that in this model only about 22% of the variability is caused by the predictor variables, the other 78% is due to other factors not included or complete randomness.\
 This is not a good model, unreliable, and needs work. ------------------------------------------------------------------------
 
-### **1.f) Making a better model**
+### **1.6) Making a better model**
 
 Checking for predictor significance
 
@@ -241,7 +241,7 @@ ai_i = \beta_0 + \beta_1 \cdot \text{age} + \beta_2 \cdot \text{sbp} + \beta_3 \
 $$
 :::
 
-### **1.g) Changes in** $R^2$ & adjusted $R^2$
+### **1.7) Changes in** $R^2$ & adjusted $R^2$
 
 Old Model
 
