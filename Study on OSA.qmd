@@ -3,6 +3,7 @@ title: "Study on OSA"
 author: "K. Rozario"
 format: html
 editor: visual
+theme: "cerulean"
 ---
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}

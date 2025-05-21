@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="Study on OSA_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Study on OSA_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Study on OSA_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Study on OSA_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="Study on OSA_files/libs/bootstrap/bootstrap-543a4e1918427d004666f917398226ff.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -133,10 +133,10 @@ window.Quarto = {
 
 
 <hr>
-<section id="question-1-study-based-on-risk-factors-for-obstructive-sleep-apnoea-osa" class="level2">
-<h2 class="anchored" data-anchor-id="question-1-study-based-on-risk-factors-for-obstructive-sleep-apnoea-osa"><strong>Question 1: Study based on risk factors for obstructive sleep apnoea (OSA)</strong></h2>
-<section id="a-scatter-plot-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="a-scatter-plot-matrix"><strong>1.a) Scatter-plot Matrix</strong></h3>
+<section id="study-based-on-risk-factors-for-obstructive-sleep-apnoea-osa" class="level2">
+<h2 class="anchored" data-anchor-id="study-based-on-risk-factors-for-obstructive-sleep-apnoea-osa"><strong>Study based on risk factors for obstructive sleep apnoea (OSA)</strong></h2>
+<section id="scatter-plot-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="scatter-plot-matrix"><strong>1.1) Scatter-plot Matrix</strong></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(sleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -155,8 +155,8 @@ window.Quarto = {
 <p>Among the predictors, <strong>bmi and neck size are highly correlated</strong>, which suggests that multicollinearity could be a concern in regression modeling. This correlation indicates that both variables are related to body composition.</p>
 <hr>
 </section>
-<section id="b-fitting-the-regression-model" class="level3">
-<h3 class="anchored" data-anchor-id="b-fitting-the-regression-model"><strong>1.b Fitting The Regression Model</strong></h3>
+<section id="fitting-the-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-the-regression-model"><strong>1.2) Fitting The Regression Model</strong></h3>
 <p><strong><em>Fitting the linear regression model using <code>ai</code> as the response variable and the other variables as the predictor.</em></strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sleep.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(ai <span class="sc">~</span> bmi <span class="sc">+</span> neck_size <span class="sc">+</span> sbp <span class="sc">+</span> age, <span class="at">data =</span> sleep)</span>
@@ -185,8 +185,8 @@ neck_size 0.01248892 0.06876571</code></pre>
 <p>This provides <strong>strong evidence</strong> that neck size is an important risk factor for obstructive sleep apnoea (OSA) severity, as measured by the frequency of arousal during sleep.</p>
 <hr>
 </section>
-<section id="c-f-test-for-the-overall-regression" class="level3">
-<h3 class="anchored" data-anchor-id="c-f-test-for-the-overall-regression"><strong>1.c) F-test For The Overall Regression</strong></h3>
+<section id="f-test-for-the-overall-regression" class="level3">
+<h3 class="anchored" data-anchor-id="f-test-for-the-overall-regression"><strong>1.3) F-test For The Overall Regression</strong></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleep.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -293,8 +293,8 @@ As the p-value from the overall F-test is extremely small (<span class="math inl
 There is strong evidence that at least one of the predictors is significantly associated with the arousal index (<code>ai</code>). Thus, this overall regression model as a whole provides quite meaningful explanatory power for predicting <code>ai</code>.</p>
 <hr>
 </section>
-<section id="d-model-validation-appropriation" class="level3">
-<h3 class="anchored" data-anchor-id="d-model-validation-appropriation"><strong>1.d) Model Validation &amp; Appropriation</strong></h3>
+<section id="model-validation-appropriation" class="level3">
+<h3 class="anchored" data-anchor-id="model-validation-appropriation"><strong>1.4) Model Validation &amp; Appropriation</strong></h3>
 <p><em>Checking residual vs fitted plots for linearity and constant variance</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sleep.lm, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -333,8 +333,8 @@ There is strong evidence that at least one of the predictors is significantly as
 </div>
 <hr>
 </section>
-<section id="e-r2-and-its-significance" class="level3">
-<h3 class="anchored" data-anchor-id="e-r2-and-its-significance"><strong>1.e)</strong> <span class="math inline">\(R^2\)</span> <strong>and It’s Significance</strong></h3>
+<section id="r2-and-its-significance" class="level3">
+<h3 class="anchored" data-anchor-id="r2-and-its-significance"><strong>1.5)</strong> <span class="math inline">\(R^2\)</span> <strong>and It’s Significance</strong></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleep.lm)<span class="sc">$</span>adj.r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -344,8 +344,8 @@ There is strong evidence that at least one of the predictors is significantly as
 <p>Adjusted <span class="math inline">\(R^2\)</span> = <code>0.2213</code>. This is quite a low value, it means that in this model only about 22% of the variability is caused by the predictor variables, the other 78% is due to other factors not included or complete randomness.<br>
 This is not a good model, unreliable, and needs work. ————————————————————————</p>
 </section>
-<section id="f-making-a-better-model" class="level3">
-<h3 class="anchored" data-anchor-id="f-making-a-better-model"><strong>1.f) Making a better model</strong></h3>
+<section id="making-a-better-model" class="level3">
+<h3 class="anchored" data-anchor-id="making-a-better-model"><strong>1.6) Making a better model</strong></h3>
 <p>Checking for predictor significance</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleep.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -451,8 +451,8 @@ ai_i = \beta_0 + \beta_1 \cdot \text{age} + \beta_2 \cdot \text{sbp} + \beta_3 \
 </div>
 </div>
 </section>
-<section id="g-changes-in-r2-adjusted-r2" class="level3">
-<h3 class="anchored" data-anchor-id="g-changes-in-r2-adjusted-r2"><strong>1.g) Changes in</strong> <span class="math inline">\(R^2\)</span> &amp; adjusted <span class="math inline">\(R^2\)</span></h3>
+<section id="changes-in-r2-adjusted-r2" class="level3">
+<h3 class="anchored" data-anchor-id="changes-in-r2-adjusted-r2"><strong>1.7) Changes in</strong> <span class="math inline">\(R^2\)</span> &amp; adjusted <span class="math inline">\(R^2\)</span></h3>
 <p>Old Model</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleep.lm)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
