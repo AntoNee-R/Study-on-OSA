@@ -14,8 +14,8 @@ library(dplyr)
 
 ```{r, echo = FALSE}
 ## loading both datasets
-energy <- read.csv("~/UNI/STAT2170/Assignment/energy.csv")
-sleep <- read.csv("~/UNI/STAT2170/Assignment/sleep.csv")
+energy <- read.csv("data/energy.csv")
+sleep <- read.csv("data/sleep.csv")
 ```
 
 ------------------------------------------------------------------------
