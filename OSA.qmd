@@ -1,9 +1,25 @@
 ---
-title: "Study on OSA"
-author: "K. Rozario"
-format: html
-editor: visual
-theme: "cerulean"
+title: "Physiological Factors of Obstructive Sleep Apnoea Severity"
+subtitle: "A Multiple Regression Analysis of Arousal Index and Associated Risk Factors" 
+author: "Anthony R."
+date: 2025-05-21
+
+format:
+  html:
+    embed-resources: true
+    theme:
+      light: cosmo
+      dark: darkly
+      
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    number-sections: true
+    number-depth: 4
+    title-block-banner: true
+
+execute: 
+  echo: false     
 ---
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
@@ -18,11 +34,29 @@ energy <- read.csv("data/energy.csv")
 sleep <- read.csv("data/sleep.csv")
 ```
 
-------------------------------------------------------------------------
+## Abstract
 
-## **Study based on risk factors for obstructive sleep apnoea (OSA)**
+This study investigates key physiological risk factors associated with the severity of obstructive sleep apnoea (OSA). Using multiple linear regression, we analyze the relationship between the arousal index (ai), a measure of sleep disruption, and several predictors: `age`, body mass index (`BMI`), `neck size`, and systolic blood pressure (`SBP`). The results reveal that neck size, SBP, and age are statistically significant predictors of OSA severity, while BMI shows minimal contribution after accounting for multicollinearity with neck size. Diagnostic plots confirm model assumptions of linearity and normality, though the model explains only about 22% of the variability in `ai.` This suggests that other unobserved variables, such as lifestyle or genetic factors, may also influence OSA severity.
 
-### **1.1) Scatter-plot Matrix**
+## Introduction
+
+Obstructive Sleep Apnoea (OSA) is a common sleep disorder characterized by repetitive pauses in breathing due to upper airway obstruction. These interruptions lead to sleep fragmentation, hypoxia, and increased cardiovascular risk. Understanding physiological predictors of OSA severity is essential for developing effective screening and prevention strategies.
+
+In this study, the arousal index (ai); representing the frequency of awakenings per hour, is used as the dependent variable. Four predictors are considered based on their known associations with OSA:
+
+Body Mass Index (BMI) – a general indicator of body fat.
+
+Neck Size – reflects airway obstruction potential.
+
+Systolic Blood Pressure (SBP) – captures cardiovascular strain.
+
+Age – accounts for physiological changes increasing OSA risk.
+
+My goal here is to determine which of these variables significantly predict `ai` and to assess the overall performance and appropriateness of the regression model.
+
+## Exploratory Analysis
+
+### Scatter-plot Matrix
 
 ```{r}
 pairs(sleep)
@@ -36,20 +70,22 @@ pairs(sleep)
 
 Among the predictors, **bmi and neck size are highly correlated**, which suggests that multicollinearity could be a concern in regression modeling. This correlation indicates that both variables are related to body composition.
 
-------------------------------------------------------------------------
+---
 
-### **1.2) Fitting The Regression Model**
+### Model Fitting and Interpretation
 
-***Fitting the linear regression model using `ai` as the response variable and the other variables as the predictor.***
+Fitting the linear regression model using `ai` as the response variable and the other variables as the predictor.
 
 ```{r}
 sleep.lm <- lm(ai ~ bmi + neck_size + sbp + age, data = sleep)
 sleep.lm
 ```
 
-------------------------------------------------------------------------
+Significant predictors (p \< 0.05) included neck size, sbp, and age, whereas bmi was not statistically significant.
 
-***Producing a 95% CI that quantifies the change in ai for each extra cm of neck size:***
+---
+
+#### Producing a 95% CI that quantifies the change in ai for each extra cm of neck size:
 
 Confidence Interval at $\alpha$ = 0.05 or 95%
 
@@ -61,17 +97,20 @@ Therefore, for every 1 cm increase in neck size, the arousal index (`ai`) increa
 
 This provides **strong evidence** that neck size is an important risk factor for obstructive sleep apnoea (OSA) severity, as measured by the frequency of arousal during sleep.
 
-------------------------------------------------------------------------
+---
 
-### **1.3) F-test For The Overall Regression**
+#### F-test For The Overall Regression
 
-```{r}
+```{r, echo=FALSE}
 summary(sleep.lm)
 ```
 
-neck_size, sbp and age have a significant impact on the response variable, arousal index (ai).
+`neck_size`, `sbp` and `age` have a significant impact on the response variable, arousal index (`ai`).
 
-***Fitting in the Multiple Regression Model***
+---
+
+
+#### Fitting in the Multiple Regression Model
 
 ::: {.callout-note appearance="simple" icon="false"}
 $$
@@ -97,9 +136,9 @@ $$
 
 This model aims to assess the overall relationship between the arousal index and the set of physiological predictors: Body Mass Index (bmi), neck size, Systolic Blood Pressure (sbp), and age.
 
-------------------------------------------------------------------------
+---
 
-***Hypothesis for the Overall ANOVA Test:***
+#### Hypothesis for the Overall ANOVA Test:
 
 The NULL Hypothesis ($H_0$) states that none of the predictors have an effect on the response variable that is arousal index (ai).
 
@@ -109,9 +148,9 @@ The Alternate Hypothesis states ($H_1$) that at least one of the predictors have
 
 -   $H_1: \beta_i \ne 0$
 
-------------------------------------------------------------------------
+---
 
-***ANOVA Table for the Overall Model***
+#### ANOVA Table for the Overall Model
 
 ```{r}
 anova(sleep.lm)
@@ -125,9 +164,9 @@ F-test for this Regression Model: **F = (4,117) and** $p-value < 0.005$
 
 Since the p-value is well below 0.05, we **reject the null hypothesis**. This indicates that at least one of the **predictors is significantly** related to the response variable.
 
-------------------------------------------------------------------------
+---
 
-***Null Distribution for the test statistic***
+#### Null Distribution for the test statistic
 
 Under the null hypothesis ($H_0$), the F-statistic follows an F-distribution with 4 and 117 degrees of freedom.
 
@@ -135,7 +174,7 @@ When $H_0: \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0$, then test statistic is **
 
 ------------------------------------------------------------------------
 
-***P-value***
+#### P-value
 
 The corresponding P-value for this overall regression model is:
 
@@ -143,11 +182,11 @@ $$\text{p-value} = 9.54 \times 10^{-7}$$
 
 (or $0.000000954$)
 
-P-value was previously calculated using the summary function aforementioned above.
+P-value was previously calculated aforementioned above.
 
-------------------------------------------------------------------------
+---
 
-***Conclusion***
+#### Findings
 
 **Statistical Conclusion:**\
 As the p-value from the overall F-test is extremely small ($9.54 \times 10^{-7}$), that is below the significance level ($\alpha = 0.05$), we reject the null hypothesis that none of the predictors (bmi, neck_size, sbp, age) are related to the response variable.
@@ -155,9 +194,11 @@ As the p-value from the overall F-test is extremely small ($9.54 \times 10^{-7}$
 **Contextual Conclusion:**\
 There is strong evidence that at least one of the predictors is significantly associated with the arousal index (`ai`). Thus, this overall regression model as a whole provides quite meaningful explanatory power for predicting `ai`.
 
-------------------------------------------------------------------------
+In plain terms, the model isn’t random; there’s a clear relationship between OSA severity and the selected body measurements.
 
-### **1.4) Model Validation & Appropriation**
+---
+
+### Model Validation & Appropriation
 
 *Checking residual vs fitted plots for linearity and constant variance*
 
@@ -169,7 +210,6 @@ The residuals are generally evenly scattered around the horizontal line at 0, wh
 
 Additionally, there are a few outliers present, at points 68, 69, and 79; however, they do not demonstrate excessive influence.
 
-------------------------------------------------------------------------
 
 *Checking the normality of residuals*
 
@@ -183,20 +223,22 @@ The standardized qqplot shows that the residuals mostly follow the normal line, 
 **Conclusion**: Based on these diagnostic checks, the full multiple regression model appears appropriate for explaining the variability in the arousal index (`ai`).
 :::
 
-------------------------------------------------------------------------
+---
 
-### **1.5)** $R^2$ **and It's Significance**
+### $R^2$ and It's Significance
 
 ```{r}
 summary(sleep.lm)$adj.r.squared
 ```
 
 Adjusted $R^2$ = `0.2213`. This is quite a low value, it means that in this model only about 22% of the variability is caused by the predictor variables, the other 78% is due to other factors not included or complete randomness.\
-This is not a good model, unreliable, and needs work. ------------------------------------------------------------------------
+This is not a good model, unreliable, and needs work.
 
-### **1.6) Making a better model**
+---
 
-Checking for predictor significance
+## Improving the Model
+
+### Checking for predictor significance
 
 ```{r}
 summary(sleep.lm)
@@ -242,22 +284,32 @@ ai_i = \beta_0 + \beta_1 \cdot \text{age} + \beta_2 \cdot \text{sbp} + \beta_3 \
 $$
 :::
 
-### **1.7) Changes in** $R^2$ & adjusted $R^2$
 
-Old Model
+---
 
-```{r}
-summary(sleep.lm)$r.squared
-summary(sleep.lm)$adj.r.squared
-```
+#### Comparing Model Fits
 
-New Model
-
-```{r}
-summary(sleep.lm2)$r.squared
-summary(sleep.lm2)$adj.r.squared
-```
+| Model    |   R²   | Adjusted R² | Predictors               | Comment             |
+|:-------------|:------------:|:------------:|:---------------|:-------------|
+| Original | 0.2471 |   0.2213    | BMI, Neck Size, SBP, Age | BMI not significant |
+| Refined  | 0.2422 |   0.2229    | Neck Size, SBP, Age      | Slight improvement  |
 
 The $R^2$ dropped marginally **(from 0.2470586 to 0.2421771)** because we removed a predictor. The adjusted $R^2$ always accounts for the no.of predictors in the model, and only increases if new variables improve the model's efficiency, the increase **(from 0.221317 to 0.2229104**) in adjusted $R^2$ indicates that the new model is likely more accurate . bmi may not have contributed significantly to explaining `ai` in the older model, so its removal results in a more efficient model.
 
-------------------------------------------------------------------------
+---
+
+## Discussion
+
+The findings confirm that neck size, blood pressure, and age are important factors associated with OSA severity. BMI, although commonly linked to sleep apnoea, was not significant here once neck size was included, suggesting that neck circumference captures the effect of body mass more directly for airway obstruction.
+
+Still, since the model only explains 22% of `ai` variation, other factors such as genetic traits, lifestyle habits, or anatomical structures likely play major roles.
+
+---
+
+## Conclusion
+
+This study shows that neck size, systolic blood pressure, and age are key predictors of OSA severity, measured by the arousal index.
+
+Even though the model explains only a modest portion of the variability, it provides valuable insight into which physical traits are most strongly linked to disrupted sleep. Improving future models with additional lifestyle and physiological data could lead to better prediction and prevention strategies for OSA.
+
+---
