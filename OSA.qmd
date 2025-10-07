@@ -19,7 +19,9 @@ format:
     title-block-banner: true
 
 execute: 
-  echo: false     
+  echo: false
+
+output-dir: "docs"
 ---
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
